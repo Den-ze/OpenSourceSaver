@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 400px;
+            margin: 0;
+            padding: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        label {
+            color: #333;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background: #1976d2;
+        }
+
+        .register-link {
+            color: #2196f3;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-top: 4px;
+        }
+
+        #result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .success {
+            color: #4caf50;
+        }
+
+        .error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>本插件使用硅基流动的免费API和模型</h3>
+        <div class="input-group">
+            <label for="apiKey">API Key:</label>
+            <input type="text" id="apiKey" placeholder="请输入你的硅基流动API Key">
+            <a href="https://cloud.siliconflow.cn/i/o6kZSNds" target="_blank" class="register-link">没有API Key？点击注册</a>
+            <div class="note">注册后可获得付费模型的免费额度，本插件只使用免费模型 Qwen2.5-7B-Instruct，不消耗你的免费额度。所以可以放心使用。作者会因为你的注册也会获得等量的少许免费额度。</div>
+        </div>
+        <button id="saveButton">保存API Key并测试效果</button>
+        <div id="result">等待测试...</div>
+    </div>
+    <script src="../js/popup.js"></script>
+</body>
+</html>
