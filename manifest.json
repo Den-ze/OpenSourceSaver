@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "开源节流_OpenSourceSaver",
+  "version": "0.1.0",
+  "description": "在商品页显示什么值得买搜索结果，包含完整评价信息",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "commands"
+  ],
+  "host_permissions": [
+    "https://item.jd.com/*",
+    "https://npcitem.jd.hk/*",
+    "https://api.siliconflow.cn/*",
+    "https://search.smzdm.com/*",
+    "https://*.smzdm.com/*"
+  ],
+  "background": {
+    "service_worker": "src/js/background.js"
+  },
+  "action": {
+    "default_title": "商品比价助手",
+    "default_popup": "src/html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://item.jd.com/*",
+        "https://npcitem.jd.hk/*"
+      ],
+      "css": ["src/css/styles.css"],
+      "js": ["src/js/main.js"]
+    }
+  ],
+  "commands": {
+    "toggle_search": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "快速搜索当前商品"
+    }
+  }
+}
