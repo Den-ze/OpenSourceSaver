@@ -27,17 +27,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// 监听快捷键命令
-chrome.commands.onCommand.addListener((command) => {
-    if (command === "toggle_search") {
-        // 获取活动标签页
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            if (tabs[0]) {
-                // 发送消息到内容脚本
-                chrome.tabs.sendMessage(tabs[0].id, {
-                    command: "toggle_search"
-                });
-            }
-        });
-    }
-});

@@ -13,8 +13,11 @@
     "https://item.jd.com/*",
     "https://npcitem.jd.hk/*",
     "https://api.siliconflow.cn/*",
-    "https://search.smzdm.com/*",
-    "https://*.smzdm.com/*"
+    "https://*.smzdm.com/*",
+    "https://detail.tmall.com/*",
+    "https://item.taobao.com/*",
+    "https://product.suning.com/*",
+    "https://detail.vip.com/*"
   ],
   "background": {
     "service_worker": "src/js/background.js"
@@ -27,18 +30,19 @@
     {
       "matches": [
         "https://item.jd.com/*",
-        "https://npcitem.jd.hk/*"
+        "https://npcitem.jd.hk/*",
+        "https://detail.tmall.com/*",
+        "https://item.taobao.com/*",
+        "https://product.suning.com/*",
+        "https://detail.vip.com/*"
       ],
       "css": ["src/css/styles.css"],
       "js": ["src/js/main.js"]
     }
   ],
-  "commands": {
-    "toggle_search": {
-      "suggested_key": {
-        "default": "Alt+S"
-      },
-      "description": "快速搜索当前商品"
-    }
+  "icons": {
+    "16": "/src/icon/icon16.png",
+    "48": "/src/icon/icon48.png",
+    "128": "/src/icon/icon128.png"
   }
 }

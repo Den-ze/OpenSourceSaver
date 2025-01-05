@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <style>
         body {
-            width: 400px;
+            width: 370px;
             margin: 0;
             padding: 15px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            text-align: left;
         }
 
         .container {
@@ -16,10 +17,18 @@
             gap: 15px;
         }
 
-        h3 {
-            margin: 0 0 15px 0;
+        h2 {
+            margin: 0 0 10px 0;
             color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h4 {
+            margin: 0 0 20px 0;
+            color: #555;
             font-size: 16px;
+            font-weight: normal;
         }
 
         .input-group {
@@ -27,8 +36,6 @@
             flex-direction: column;
             gap: 8px;
             width: 100%;
-            max-width: 350px;
-            margin: 0 auto;
         }
 
         label {
@@ -36,8 +43,9 @@
             font-size: 14px;
         }
 
-        input, textarea {
+        input, textarea, button {
             width: 100%;
+            max-width: 450px;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -51,16 +59,10 @@
         }
 
         button {
-            width: 100%;
-            max-width: 350px;
-            margin: 0 auto;
-            padding: 10px;
             background: #2196f3;
             color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
-            font-size: 14px;
             transition: background-color 0.2s;
         }
 
@@ -71,7 +73,7 @@
         .register-link {
             color: #2196f3;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .register-link:hover {
@@ -86,11 +88,9 @@
         }
 
         #result {
-            margin-top: 10px;
-            padding: 10px;
-            background: #f5f5f5;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 11px;
+            text-align: left;
         }
 
         .success {
@@ -100,19 +100,104 @@
         .error {
             color: #f44336;
         }
+
+        .modal-checkbox:checked + .modal-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: left;
+        }
+
+        .close-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #aaa;
+            z-index: 1;
+        }
+
+        .close-label:hover {
+            color: black;
+        }
+
+        .close-checkbox {
+            display: none;
+        }
+
+        .qr-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .qr-item img {
+            max-width: 100px; /* 调整二维码图片的最大宽度 */
+            height: auto; /* 保持图片的宽高比 */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h3>本插件使用硅基流动的免费API和模型</h3>
+        <h1>开源节流_OpenSourceSaver</h1>
         <div class="input-group">
-            <label for="apiKey">API Key:</label>
+            <label for="apiKey">请填入硅基流动的免费API Key:</label>
             <input type="text" id="apiKey" placeholder="请输入你的硅基流动API Key">
-            <a href="https://cloud.siliconflow.cn/i/o6kZSNds" target="_blank" class="register-link">没有API Key？点击注册</a>
-            <div class="note">注册后可获得付费模型的免费额度，本插件只使用免费模型 Qwen2.5-7B-Instruct，不消耗你的免费额度。所以可以放心使用。作者会因为你的注册也会获得等量的少许免费额度。</div>
+            <div class="footer-links">
+                <a href="https://cloud.siliconflow.cn/i/o6kZSNds" target="_blank" class="register-link">没有API Key 点击注册</a>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
+                <a href="https://cloud.siliconflow.cn/account/ak" target="_blank" class="register-link">API Key管理</a>
+            </div>
         </div>
-        <button id="saveButton">保存API Key并测试效果</button>
-        <div id="result">等待测试...</div>
+        <button id="saveButton">保存 API Key</button>
+        <div id="result">注册可获得付费模型额度，但本插件只用其免费模型，不消耗额度可放心使用。作者会因为注册邀请，获得和你等量的额度，并不会获得其他收益。</div>
+        <div class="footer-links">
+            <a href="https://github.com/Den-ze/OpenSourceSaver/releases/tag/public" target="_blank" class="register-link">版本号: 0.2.0</a>&nbsp;&nbsp&nbsp;&nbsp
+            <a href="https://github.com/Den-ze/OpenSourceSaver" target="_blank" class="register-link">Github仓库</a>&nbsp;&nbsp&nbsp;&nbsp
+            <a href="mailto:wiseteng@gmail.com" target="_blank" class="register-link">联系作者</a>&nbsp;&nbsp&nbsp;&nbsp
+            <!-- 使用复选框控制模态窗口 -->
+            <label for="sponsorCheckbox" class="register-link">赞助作者</label>
+            <input type="checkbox" id="sponsorCheckbox" class="modal-checkbox" style="display:none;">
+            <!-- 赞助二维码弹窗 -->
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <label for="sponsorCheckbox" class="close-label">&times;</label>
+                    <h4>赞助作者打一场乒乓球</h4>
+                    <div class="qr-container">
+                        <div class="qr-item">
+                            <img src="../images/wechat.jpg" alt="赞助二维码">
+                        </div>
+                        <div class="qr-item">
+                            <img src="../images/alipay.jpg" alt="赞助二维码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="../js/popup.js"></script>
 </body>
