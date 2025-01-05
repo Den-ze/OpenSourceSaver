@@ -12,11 +12,13 @@
 ✅苏宁
 ✅唯品会
 
-
 ## 预览图
-<img width="427" alt="image" src="https://github.com/user-attachments/assets/098b64e1-c52d-48f6-bdaf-64a3f83f1363" /><img width="1848" alt="image" src="https://github.com/user-attachments/assets/0eddfc6d-0518-44f7-bd43-6cc0909643c2" />
+![插件页](https://github.com/user-attachments/assets/3b20b081-5938-4881-95b2-570b8c4ded45)![商品索尼](https://github.com/user-attachments/assets/613909cc-a47b-4fb0-bafe-1ced8f9cdf19)
+![商品 tv](https://github.com/user-attachments/assets/193fe4c3-7ca5-450f-a79c-e093b9913eec)![商品水笔](https://github.com/user-attachments/assets/d5b93780-be08-474f-8237-69aa276c6354)
+![商品水笔 2](https://github.com/user-attachments/assets/3cf325e3-2e5e-4164-a7fe-801ec8f177b5)
 
 ## 安装与使用
+
 1. 下载或克隆本项目到本地。
 2. 打开 Chrome 浏览器或其他谷歌内核的浏览器，比如 EDGE，进入扩展程序页面（chrome://extensions）。
 3. 打开“开发者模式”，点击“加载已解压的扩展程序”，选择本项目文件夹。
