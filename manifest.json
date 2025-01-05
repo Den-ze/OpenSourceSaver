@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "开源节流_OpenSourceSaver",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "在商品页显示什么值得买搜索结果，包含完整评价信息",
   "permissions": [
     "activeTab",
