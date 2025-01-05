@@ -9,7 +9,8 @@
 ✅淘宝
 ✅天猫
 ✅苏宁
-✅...
+✅唯品会
+
 
 ## 预览图
 <img width="427" alt="image" src="https://github.com/user-attachments/assets/098b64e1-c52d-48f6-bdaf-64a3f83f1363" /><img width="1848" alt="image" src="https://github.com/user-attachments/assets/0eddfc6d-0518-44f7-bd43-6cc0909643c2" />
