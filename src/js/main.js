@@ -77,50 +77,60 @@ const api = {
         }
     },
 
-    // 搜索什么值得买网站
+    // 定义 SMZDM 搜索链接池
+    smzdmUrls: [
+        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b`,
+        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&mx_v=b`,
+        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}`
+    ],
+
+    // 修改 searchSmzdm 函数以循环尝试不同的 URL
     async searchSmzdm(keyword) {
-        const url = `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b`;
-
-        try {
-            const response = await new Promise((resolve, reject) => {
-                chrome.runtime.sendMessage(
-                    {
-                        action: 'fetchSmzdm',
-                        url: url,
-                        headers: {
-                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-                            'Cache-Control': 'no-cache',
-                            'Pragma': 'no-cache',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        for (let i = 0; i < this.smzdmUrls.length; i++) {
+            const url = this.smzdmUrls[i](keyword);
+            try {
+                const response = await new Promise((resolve, reject) => {
+                    chrome.runtime.sendMessage(
+                        {
+                            action: 'fetchSmzdm',
+                            url: url,
+                            headers: {
+                                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                                'Cache-Control': 'no-cache',
+                                'Pragma': 'no-cache',
+                                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                            }
+                        },
+                        response => {
+                            if (response && response.success) {
+                                resolve(response);
+                            } else {
+                                reject(new Error(response ? response.error : '请求失败'));
+                            }
                         }
-                    },
-                    response => {
-                        if (response && response.success) {
-                            resolve(response);
-                        } else {
-                            reject(new Error(response ? response.error : '请求失败'));
-                        }
-                    }
-                );
-            });
+                    );
+                });
 
-            if (!response.success) {
-                throw new Error('搜索请求失败');
+                if (!response.success) {
+                    throw new Error('搜索请求失败');
+                }
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(response.data, 'text/html');
+
+                const errorElement = doc.querySelector('.error-notice');
+                if (errorElement) {
+                    throw new Error('搜索结果不可用');
+                }
+
+                return doc;
+            } catch (error) {
+                console.error(`SMZDM 搜索失败 (尝试第 ${i + 1} 个 URL):`, error);
+                if (i === this.smzdmUrls.length - 1) {
+                    throw new Error(`所有搜索链接均不可用: ${error.message}`);
+                }
             }
-
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(response.data, 'text/html');
-
-            const errorElement = doc.querySelector('.error-notice');
-            if (errorElement) {
-                throw new Error('搜索结果不可用');
-            }
-
-            return doc;
-        } catch (error) {
-            console.error('SMZDM 搜索失败:', error);
-            throw new Error(`搜索失败: ${error.message}`);
         }
     }
 };
@@ -276,7 +286,7 @@ const ui = {
         }
     },
 
-    // 执行搜索操作
+    // 修改 performSearch 函数以使用新的 searchSmzdm 函数
     async performSearch(keyword) {
         const content = document.querySelector('#smzdm-content');
         if (!content) return;
@@ -284,11 +294,11 @@ const ui = {
         content.innerHTML = '<div class="loading">正在搜索...</div>';
         try {
             const searchResults = await api.searchSmzdm(keyword);
-            const searchUrl = `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b`;
-            this.displayResults(searchResults, searchUrl);
+            const searchUrl = api.smzdmUrls[0](keyword); // 使用第一个 URL 作为原始链接
+            ui.displayResults(searchResults, searchUrl);
         } catch (error) {
             console.error('搜索失败:', error);
-            this.showError(`${error.message} <br>您可以<a href="https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b" target="_blank">点击这里</a>直接访问什么值得买`);
+            ui.showError(`${error.message} <br>您可以<a href="${api.smzdmUrls[0](keyword)}" target="_blank">点击这里</a>直接访问什么值得买`);
         }
     }
 };
