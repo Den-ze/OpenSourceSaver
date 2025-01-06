@@ -81,7 +81,8 @@ const api = {
     smzdmUrls: [
         keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b`,
         keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&mx_v=b`,
-        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}`
+        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}`,
+        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&v=a&mx_v=b`
     ],
 
     // 修改 searchSmzdm 函数以循环尝试不同的 URL
