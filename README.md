@@ -12,7 +12,8 @@
 ✅唯品会
 
 ## 预览图
-![插件页](https://github.com/user-attachments/assets/3b20b081-5938-4881-95b2-570b8c4ded45)![商品索尼](https://github.com/user-attachments/assets/613909cc-a47b-4fb0-bafe-1ced8f9cdf19)
+![插件页](https://github.com/user-attachments/assets/4434333d-5acb-4b36-a220-f28304514b4c)
+![商品索尼](https://github.com/user-attachments/assets/613909cc-a47b-4fb0-bafe-1ced8f9cdf19)
 ![商品 tv](https://github.com/user-attachments/assets/193fe4c3-7ca5-450f-a79c-e093b9913eec)![商品水笔](https://github.com/user-attachments/assets/d5b93780-be08-474f-8237-69aa276c6354)
 ![商品水笔 2](https://github.com/user-attachments/assets/3cf325e3-2e5e-4164-a7fe-801ec8f177b5)
 
