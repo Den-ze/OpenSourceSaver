@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const testTitle = "索尼（SONY）Alpha 7 IV 全画幅微单相机 创意外观滤镜 单机身 五轴防抖 4K 60p（ILCE-7M4/A7M4）";
     const customUrlInput = document.getElementById('customUrl');
     const addUrlButton = document.getElementById('addUrlButton');
+    const versionLink = document.getElementById('version-link');
+    const manifest = chrome.runtime.getManifest();
+    const version = manifest.version;
+
+    if (versionLink) {
+        versionLink.textContent += version;
+    }
 
     // 定义 utils 对象
     const utils = {
