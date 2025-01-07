@@ -20,7 +20,7 @@
         h2 {
             margin: 0 0 10px 0;
             color: #333;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
         }
 
@@ -157,24 +157,51 @@
         }
 
         .qr-item img {
-            max-width: 100px; /* 调整二维码图片的最大宽度 */
-            height: auto; /* 保持图片的宽高比 */
+            max-width: 100px;
+            height: auto;
+        }
+
+        hr {
+            width: 90%; 
+        }
+        * {
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 使用gap代替多个&nbsp; */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>开源节流_OpenSourceSaver</h1>
+        <h2>开源节流_OpenSourceSaver</h2>
+        
         <div class="input-group">
-            <label for="apiKey">请填入硅基流动的免费API Key:</label>
-            <input type="text" id="apiKey" placeholder="请输入你的硅基流动API Key">
+            <label for="apiKey">第一步：  填入硅基流动的API Key</label>
             <div class="footer-links">
-                <a href="https://cloud.siliconflow.cn/i/o6kZSNds" target="_blank" class="register-link">没有API Key 点击注册</a>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
-                <a href="https://cloud.siliconflow.cn/account/ak" target="_blank" class="register-link">API Key管理</a>
+                <a href="https://cloud.siliconflow.cn/i/o6kZSNds" target="_blank" class="register-link">点击注册</a>
+                <a href="https://cloud.siliconflow.cn/account/ak" target="_blank" class="register-link">管理后台</a>
             </div>
+            <input type="text" id="apiKey" placeholder="API 密钥 ——— 新建密钥 ——— 复制密钥">
+            <button id="saveButton">保存 API Key</button>
+            
         </div>
-        <button id="saveButton">保存 API Key</button>
-        <div id="result">注册可获得付费模型额度，但本插件只用其免费模型，不消耗额度可放心使用。作者会因为注册邀请，获得和你等量的额度，并不会获得其他收益。</div>
+        <hr>
+        
+        <div class="input-group">
+            <label for="customUrl">第二步：  填入爆料URL</label>
+            <div class="footer-links">
+                <a href="https://search.smzdm.com/?c=faxian&s=testlink" target="_blank" class="register-link">访问这里，勾选值率≥50%，复制URL</a>
+            </div>
+            <input type="text" id="customUrl" placeholder="在此粘贴勾选值率≥50%的网站URL">
+            <button id="addUrlButton">保存 URL</button>
+        </div>
+        <hr>
+        <div id="result" class="note">注册可获得付费模型额度，但本插件只用其免费模型，不消耗额度可放心使用。作者会因为注册邀请，获得和你等量的额度，并不会获得其他收益。</div>
+
         <div class="footer-links">
             <a href="https://github.com/Den-ze/OpenSourceSaver/releases/tag/public" target="_blank" class="register-link">版本号: 0.2.0</a>&nbsp;&nbsp&nbsp;&nbsp
             <a href="https://github.com/Den-ze/OpenSourceSaver" target="_blank" class="register-link">Github仓库</a>&nbsp;&nbsp&nbsp;&nbsp

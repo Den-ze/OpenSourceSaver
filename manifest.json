@@ -1,11 +1,9 @@
 {
   "manifest_version": 3,
   "name": "开源节流_OpenSourceSaver",
-  "version": "0.2.0",
-  "description": "在商品页显示什么值得买搜索结果，包含完整评价信息",
+  "version": "0.2.1",
+  "description": "在商品页显示什么值得买搜索结果，帮你查历史爆料",
   "permissions": [
-    "activeTab",
-    "scripting",
     "storage",
     "commands"
   ],
@@ -23,7 +21,7 @@
     "service_worker": "src/js/background.js"
   },
   "action": {
-    "default_title": "商品比价助手",
+    "default_title": "开源节流_OpenSourceSaver",
     "default_popup": "src/html/popup.html"
   },
   "content_scripts": [

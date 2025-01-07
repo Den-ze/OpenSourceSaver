@@ -77,16 +77,23 @@ const api = {
         }
     },
 
-    // 定义 SMZDM 搜索链接池
-    smzdmUrls: [
-        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&v=b`,
-        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&f_c=zhi&mx_v=b`,
-        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}`,
-        keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}&order=score&v=a&mx_v=b`
-    ],
+    smzdmUrls: [],
+
+    async initSmzdmUrls() {
+        // 获取存储的自定义 URL
+        const result = await chrome.storage.local.get(['customSmzdmUrl']);
+        const customUrl = result.customSmzdmUrl || 'https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}';
+
+        // 初始化 URL 列表
+        this.smzdmUrls = [
+            keyword => customUrl.replace('testlink', encodeURIComponent(keyword)),
+            // keyword => `https://search.smzdm.com/?c=faxian&s=${encodeURIComponent(keyword)}`
+        ];
+    },
 
     // 修改 searchSmzdm 函数以循环尝试不同的 URL
     async searchSmzdm(keyword) {
+        await this.initSmzdmUrls();
         for (let i = 0; i < this.smzdmUrls.length; i++) {
             const url = this.smzdmUrls[i](keyword);
             try {
